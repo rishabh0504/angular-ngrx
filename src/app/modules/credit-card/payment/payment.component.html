@@ -1,0 +1,72 @@
+<div class='container'>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class='text-center text-success'>Payment</h4>
+                    <form [formGroup]="paymentForm">
+                        <mat-form-field class="mt-2 mr-1 ml-1">
+                            <mat-label>Amount</mat-label>
+                            <input type="text" matInput matInput formControlName="amount" required
+                                [pattern]="validationObject?.amount">
+
+                            <mat-error *ngIf="paymentForm?.get('amount') && paymentForm?.get('amount')?.invalid">
+                                Please enter a valid amount.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="mt-2 mr-1 ml-1">
+                            <mat-label>Card Number</mat-label>
+                            <input type="text" matInput matInput formControlName="cardNumber" required
+                                [pattern]="validationObject?.cardNumber">
+
+                            <mat-error
+                                *ngIf="paymentForm?.get('cardNumber') && paymentForm?.get('cardNumber')?.invalid">
+                                Please enter a valid card number.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="mt-2 mr-1 ml-1">
+                            <mat-label>Name On Card</mat-label>
+                            <input type="text" matInput matInput formControlName="cardHolder" required
+                                [pattern]="validationObject?.cardHolder">
+
+                            <mat-error
+                                *ngIf="paymentForm?.get('cardHolder') && paymentForm?.get('cardHolder')?.invalid">
+                                Please enter a valid card holder name.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="mt-2 mr-1 ml-1">
+                            <mat-label> CVV</mat-label>
+                            <input type="password" matInput matInput formControlName="cvv" required
+                                [pattern]="validationObject?.cvv">
+
+                            <mat-error *ngIf="paymentForm?.get('cvv') && paymentForm?.get('cvv')?.invalid">
+                                Please enter a valid cvv.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="mt-2 mr-1 ml-1">
+                            <mat-label> Expiry</mat-label>
+                            <input type="month" matInput formControlName="expiry" [min]="minDate" required>
+                            <mat-error *ngIf="true">
+                                Please enter a valid expiry date.
+                            </mat-error>
+                        </mat-form-field>
+                        <div class="container-fluid">
+                            <button mat-raised-button class='mt-2' (click)="makePayment()">Pay now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 credit-card">
+            <div class="card-body ml-1 mr-1">
+                <h3 class='bank-name mt-3'>{{bankName}}</h3>
+                <div class="footer mt-5 mb-3">
+                    <h5 class='mb-1 card-number'>{{ formatcardNumber() }}</h5>
+                    <h5 class='mb-1 valid'>Valid: {{ formatDate() }}</h5>
+                    <h5 class='mb-1 cvv'>CVV : {{ paymentForm?.get('cvv').value }}</h5>
+                    <h5 class='mb-1 holder'>{{ paymentForm?.get('cardHolder').value }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

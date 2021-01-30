@@ -1,0 +1,10 @@
+<div class="container">
+    <h4 class='text-center text-success'>Payment history</h4>
+    <div *ngFor="let paymentHistorys of paymentHistory$ | async; let i=index">
+        <mat-list role="list">
+            <mat-card *ngFor="let card of paymentHistorys ; let j=index" class="mt-2">
+                {{card.cardHolder}}-{{card.cardNumber}}
+            </mat-card>
+        </mat-list>
+    </div>
+</div>
